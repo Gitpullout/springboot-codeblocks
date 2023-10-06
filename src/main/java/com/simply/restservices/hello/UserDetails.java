@@ -33,12 +33,12 @@ public class UserDetails {
 		this.city = city;
 	}
 
+
+	//toString
 	@Override
 	public String toString() {
 		return "UserDetails [firstname=" + firstname + ", lastname=" + lastname + ", city=" + city + "]";
 	}
-	
-	//toString
 	
 
 }
