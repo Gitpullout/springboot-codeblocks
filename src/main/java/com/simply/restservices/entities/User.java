@@ -1,9 +1,12 @@
 package com.simply.restservices.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -14,35 +17,35 @@ import javax.validation.constraints.Size;
 public class User {
 	@Id
 	@GeneratedValue
-	private Long Id;
-	
+	private long Id;
+
 	@NotEmpty(message = "Username is mandatory field. Please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String username;
-	
-	@Size(min=2, message="Firstname should have atleast two characters")
+
+	@Size(min = 2, message = "Firstname should have atleast two characters")
 	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	private String firstname;
-	
+
 	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	private String lastname;
-	
+
 	@Column(name = "EMAIL_ADDRESS", length = 50, nullable = false)
 	private String email;
-	
+
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
-	
+
 	@Column(name = "SSN", length = 50, nullable = false, unique = true)
 	private String ssn;
 
-	//No Argument Constructor
+	// No Argument Constructor
 	public User() {
-		
+
 	}
 
-	//Fields Constructor
-	public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn) {
+	// Fields Constructor
+	public User(long id, String username, String firstname, String lastname, String email, String role, String ssn) {
 		Id = id;
 		this.username = username;
 		this.firstname = firstname;
@@ -51,13 +54,25 @@ public class User {
 		this.role = role;
 		this.ssn = ssn;
 	}
-	
+
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
+
+	// Getters and Setter for orders
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	// Getters and Setters
-	public Long getId() {
+	public long getId() {
 		return Id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		Id = id;
 	}
 
@@ -109,13 +124,11 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	//To String
+	// To String
 	@Override
 	public String toString() {
 		return "User [Id=" + Id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
-	}	
+	}
 
-	
-	
 }
