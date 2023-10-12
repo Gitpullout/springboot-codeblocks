@@ -31,14 +31,14 @@ import com.simply.restservices.services.UserService;
 //controller
 @RestController
 @Validated
-@RequestMapping(value ="/users")
+@RequestMapping(value = "/users")
 public class UserController {
 
 	@Autowired
 	private UserService UserService;
 
 	// GetAll users
-	//@GetMapping("/users")
+	// @GetMapping("/users")
 	@GetMapping
 	public List<User> getAllUsers() {
 		return UserService.getAllUsers();
@@ -47,7 +47,7 @@ public class UserController {
 	// create user
 	// @requestbody anotation
 	// @postmapping anotation
-	//@PostMapping("/users")
+	// @PostMapping("/users")
 	@PostMapping
 	public ResponseEntity<Object> creatuser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 		try {
@@ -62,7 +62,7 @@ public class UserController {
 	}
 
 	// getUserById
-	//@GetMapping("/users/{id}")
+	// @GetMapping("/users/{id}")
 	@GetMapping("/{id}")
 	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
 		try {
@@ -73,7 +73,7 @@ public class UserController {
 	}
 
 	// updateUserById
-	//@PutMapping("/users/{id}")
+	// @PutMapping("/users/{id}")
 	@PutMapping("/{id}")
 	public User updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
 		try {
@@ -84,14 +84,14 @@ public class UserController {
 	}
 
 	// deleteUserById
-	//@DeleteMapping("/users/{id}")
+	// @DeleteMapping("/users/{id}")
 	@DeleteMapping("/{id}")
 	public void deleteUserById(@PathVariable("id") Long id) {
 		UserService.deleteUserById(id);
 
 	}
 
-	//@GetMapping("/users/byusername/{username}")
+	// @GetMapping("/users/byusername/{username}")
 	@GetMapping("/byusername/{username}")
 	public User getUserByUserName(@PathVariable("username") String username) throws UserNameNotFoundException {
 		// return UserService.getUserByUserName(username);
