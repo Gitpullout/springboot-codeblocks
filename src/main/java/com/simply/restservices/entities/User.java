@@ -18,27 +18,36 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 //Entity 
 @Entity
 @Table(name = "users")
+@ApiModel(description = "This model is to create a user")
 //@JsonIgnoreProperties({"firstname","lastername"})  --static filtering @JsonIgnore
 //@JsonFilter(value = "userFilter") -- used for MappingJacksonvalue filtering section
 public class User extends RepresentationModel {
+	
+	@ApiModelProperty(notes = "Auto Generated unique id", required = true, position=1)
 	@Id
 	@GeneratedValue
 	@JsonView(Views.External.class)
 	private long Id;
 
+	@ApiModelProperty(notes = "Username should in formate flname", example ="kprasad", required = false, position=2)
+	@Size(min = 2,max=50,message = "Username should have atleast two characters")
 	@NotEmpty(message = "Username is mandatory field. Please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	@JsonView(Views.External.class)
 	private String username;
 
-	@Size(min = 2, message = "Firstname should have atleast two characters")
+	@Size(min = 2,max=50, message = "Firstname should have atleast two characters")
 	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	@JsonView(Views.External.class)
 	private String firstname;
 
+	@Size(min = 2,max=50, message = "Lastname should have atleast two characters")
 	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	@JsonView(Views.External.class)
 	private String lastname;
