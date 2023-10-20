@@ -30,12 +30,12 @@ import com.simply.restservices.exceptions.UserNameNotFoundException;
 import com.simply.restservices.exceptions.UserNotFoundException;
 import com.simply.restservices.services.UserService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiParam;
 
 //controller
-@Api( tags = "User Management Restful service", value="UserControl", description = "Control for UserManagement service")
+//@Api( tags = "User Management Restful service", value="UserControl", description = "Control for UserManagement service")
 @RestController
 @Validated
 @RequestMapping(value = "/users")
@@ -46,7 +46,7 @@ public class UserController {
 
 	// GetAll users
 	// @GetMapping("/users")
-	@ApiOperation(value ="Retrive list of Users")
+	//@ApiOperation(value ="Retrive list of Users")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAllUsers() {
 		return UserService.getAllUsers();
@@ -56,9 +56,10 @@ public class UserController {
 	// @requestbody anotation
 	// @postmapping anotation
 	// @PostMapping("/users")
-	@ApiOperation(value ="Create a new User")
+	//@ApiOperation(value ="Create a new User")
 	@PostMapping
-	public ResponseEntity<Object> creatuser(@ApiParam("User information for a new user to be create")@Valid @RequestBody User user, UriComponentsBuilder builder) {
+	//public ResponseEntity<Object> creatuser(@ApiParam("User information for a new user to be create")@Valid @RequestBody User user, UriComponentsBuilder builder) {
+	public ResponseEntity<Object> creatuser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 		try {
 			UserService.createuser(user);
 			HttpHeaders headers = new HttpHeaders();
